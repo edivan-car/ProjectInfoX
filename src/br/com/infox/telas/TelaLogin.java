@@ -6,11 +6,12 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Edivan
+ * 
+ * @author Edivan Cardoso
  */
 public class TelaLogin extends javax.swing.JFrame {
 
+    // variáveis para conexão com o DB - dal
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -52,9 +53,6 @@ public class TelaLogin extends javax.swing.JFrame {
         }
     }
 
-    /**
-     * Creates new form TelaLogin
-     */
     public TelaLogin() {
         initComponents();
         conexao = ModuloConexao.conector();

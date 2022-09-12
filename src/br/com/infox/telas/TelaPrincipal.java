@@ -9,8 +9,8 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Edivan
+ * 
+ * @author Edivan Cardoso
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
