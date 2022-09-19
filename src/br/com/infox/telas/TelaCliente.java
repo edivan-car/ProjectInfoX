@@ -87,6 +87,9 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         txtCliEndereco.setText(tabClientes.getModel().getValueAt(setar, 2).toString());
         txtCliFone.setText(tabClientes.getModel().getValueAt(setar, 3).toString());
         txtCliEmail.setText(tabClientes.getModel().getValueAt(setar, 4).toString());
+        
+        //desabilita o botão adicionar
+        btnAdicionar.setEnabled(false);
     }
 
     // método para atualizar os dados do cliente
@@ -117,12 +120,38 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                     txtCliEndereco.setText(null);
                     txtCliFone.setText(null);
                     txtCliEmail.setText(null);
+                    btnAdicionar.setEnabled(true);
                 }
             }
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
+    }
+    
+    // Método para remover clientes
+    private void remover(){
+        int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover o cliente?","Atenção", JOptionPane.YES_NO_OPTION);
+        if (confirma==JOptionPane.YES_OPTION){
+            String sql = "delete from tb_clientes where id_cli=?";
+            try {
+                pst=conexao.prepareStatement(sql);
+                pst.setString(1, txtCliId.getText());
+                int apagado = pst.executeUpdate();
+                if (apagado>0){
+                    JOptionPane.showMessageDialog(null, "Cliente removido com sucesso.");
+                    txtCliId.setText(null);
+                    txtCliNome.setText(null);
+                    txtCliEndereco.setText(null);
+                    txtCliFone.setText(null);
+                    txtCliEmail.setText(null);
+                    btnAdicionar.setEnabled(true);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+        
     }
 
     /**
@@ -147,12 +176,15 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabClientes = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnRemover = new javax.swing.JButton();
         btnAdicionar = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtCliId = new javax.swing.JTextField();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
         setTitle("Clientes");
         setPreferredSize(new java.awt.Dimension(650, 480));
 
@@ -196,8 +228,13 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tabClientes);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/delete.png"))); // NOI18N
-        jButton1.setPreferredSize(new java.awt.Dimension(80, 80));
+        btnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/delete.png"))); // NOI18N
+        btnRemover.setPreferredSize(new java.awt.Dimension(80, 80));
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
 
         btnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/create.png"))); // NOI18N
         btnAdicionar.setPreferredSize(new java.awt.Dimension(80, 80));
@@ -241,7 +278,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                         .addGap(100, 100, 100)
                         .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(110, 110, 110)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,7 +342,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         setBounds(0, 0, 650, 480);
@@ -331,11 +368,16 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         alterar();
     }//GEN-LAST:event_btnAlterarActionPerformed
 
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        // chama o méodo remover clientes
+        remover();
+    }//GEN-LAST:event_btnRemoverActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnAlterar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnRemover;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
