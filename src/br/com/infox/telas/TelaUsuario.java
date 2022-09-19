@@ -43,10 +43,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário não cadastrado!");
-                txtUsuNome.setText(null);
-                txtUsuLogin.setText(null);
-                txtUsuFone.setText(null);
-                txtUsuSenha.setText(null);
+                limpar();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -66,8 +63,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             pst.setString(6, cboUsuPerfil.getSelectedItem().toString());
 
             // Validação dos campos obrigatórios
-            if ((txtUsuId.getText().isEmpty()) || (txtUsuNome.getText().isEmpty()) ||
-                    (txtUsuLogin.getText().isEmpty()) || (txtUsuSenha.getText().isEmpty())){
+            if ((txtUsuId.getText().isEmpty()) || (txtUsuNome.getText().isEmpty())
+                    || (txtUsuLogin.getText().isEmpty()) || (txtUsuSenha.getText().isEmpty())) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios.");
             } else {
                 // atualiza a tabela usuario
@@ -78,11 +75,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 //System.out.println(adicionado);
                 if (adicionado > 0) {
                     JOptionPane.showMessageDialog(null, "Usuário adicionado com sucesso!");
-                    txtUsuId.setText(null);
-                    txtUsuNome.setText(null);
-                    txtUsuLogin.setText(null);
-                    txtUsuFone.setText(null);
-                    txtUsuSenha.setText(null);
+                    limpar();
                 }
             }
 
@@ -90,23 +83,23 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
     // método para atualizar os dados do usuário
-    private void alterar(){
+    private void alterar() {
         String sql = "update tb_usuarios set usuario=?, fone=?, login=?, senha=?, perfil=? where id_user=?";
         try {
-            pst=conexao.prepareStatement(sql);
+            pst = conexao.prepareStatement(sql);
             pst.setString(1, txtUsuNome.getText());
             pst.setString(2, txtUsuFone.getText());
             pst.setString(3, txtUsuLogin.getText());
             pst.setString(4, txtUsuSenha.getText());
             pst.setString(5, cboUsuPerfil.getSelectedItem().toString());
             pst.setString(6, txtUsuId.getText());
-            
-            if ((txtUsuId.getText().isEmpty()) || 
-                    (txtUsuNome.getText().isEmpty()) ||
-                    (txtUsuLogin.getText().isEmpty()) || 
-                    (txtUsuSenha.getText().isEmpty())){
+
+            if ((txtUsuId.getText().isEmpty())
+                    || (txtUsuNome.getText().isEmpty())
+                    || (txtUsuLogin.getText().isEmpty())
+                    || (txtUsuSenha.getText().isEmpty())) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios.");
             } else {
                 // atualiza a tabela usuario
@@ -117,41 +110,42 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 //System.out.println(adicionado);
                 if (adicionado > 0) {
                     JOptionPane.showMessageDialog(null, "Dados do usuário alterados com sucesso!");
-                    txtUsuId.setText(null);
-                    txtUsuNome.setText(null);
-                    txtUsuLogin.setText(null);
-                    txtUsuFone.setText(null);
-                    txtUsuSenha.setText(null);
+                    limpar();
                 }
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
     // Método para remover usuários
-    private void remover(){
-        int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover o usuário?","Atenção", JOptionPane.YES_NO_OPTION);
-        if (confirma==JOptionPane.YES_OPTION){
+    private void remover() {
+        int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover o usuário?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if (confirma == JOptionPane.YES_OPTION) {
             String sql = "delete from tb_usuarios where id_user=?";
             try {
-                pst=conexao.prepareStatement(sql);
+                pst = conexao.prepareStatement(sql);
                 pst.setString(1, txtUsuId.getText());
                 int apagado = pst.executeUpdate();
-                if (apagado>0){
+                if (apagado > 0) {
                     JOptionPane.showMessageDialog(null, "Usuário removido com sucesso.");
-                    txtUsuId.setText(null);
-                    txtUsuNome.setText(null);
-                    txtUsuLogin.setText(null);
-                    txtUsuFone.setText(null);
-                    txtUsuSenha.setText(null);
+                    limpar();
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }
         }
-        
+
+    }
+
+    // método limpar campos
+    private void limpar() {
+        txtUsuId.setText(null);
+        txtUsuNome.setText(null);
+        txtUsuLogin.setText(null);
+        txtUsuFone.setText(null);
+        txtUsuSenha.setText(null);
     }
 
     /**
