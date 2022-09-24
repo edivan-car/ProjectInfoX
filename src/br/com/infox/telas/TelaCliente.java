@@ -238,6 +238,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tabClientes);
 
         btnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/delete.png"))); // NOI18N
+        btnRemover.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRemover.setPreferredSize(new java.awt.Dimension(80, 80));
         btnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -246,6 +247,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         });
 
         btnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/create.png"))); // NOI18N
+        btnAdicionar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAdicionar.setPreferredSize(new java.awt.Dimension(80, 80));
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -254,6 +256,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         });
 
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/update.png"))); // NOI18N
+        btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar.setPreferredSize(new java.awt.Dimension(80, 80));
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
